@@ -5,7 +5,9 @@ import InputBox from "../ui/inputbox";
 import { useForm, Controller } from "react-hook-form";
 import { Formik } from "formik";
 import { useState } from "react";
-import {KeyboardAvoidingView} from 'react-native';
+import { KeyboardAvoidingView } from "react-native";
+import { Connect } from "react-redux";
+import { create_user } from "../../redux/action/actionapi";
 
 export default function RegisterComponent() {
   const [name, setName] = useState("");
@@ -15,62 +17,61 @@ export default function RegisterComponent() {
   const [bloodType, setBloodType] = useState("");
   const [location, setLocation] = useState("");
 
-  function handleForm() {
+  function registerUserHandler() {
     console.log(name, email, password, phone, bloodType, location);
+    create_user({ name, email, password, phone, bloodType, location });
+    console.log(Connect)
   }
 
   return (
-    
-     <Formik onSubmit={(values) => console.log("submitted", values)}>
-        <View>
-          <InputBox
-            secureText={false}
-            Inputtype="givenName"
-            text="Name"
-            icon={require("../../assets/icon/profile.png")}
-            setUserdata={setName}
-          />
-          <InputBox
-            secureText={false}
-            Inputtype="emailAddress"
-            text="Email"
-            icon={require("../../assets/icon/mail.png")}
-            setUserdata={setEmail}
-          />
-          <InputBox
-            secureText={true}
-            Inputtype="newPassword"
-            text="password"
-            icon={require("../../assets/icon/password.png")}
-            setUserdata={setPassword}
-          />
-          <InputBox
-            secureText={false}
-            Inputtype="telephoneNumber"
-            text="Phone"
-            icon={require("../../assets/icon/phone.png")}
-            setUserdata={setPhone}
-          />
-          <InputBox
-            secureText={false}
-            Inputtype="none"
-            text="Blood group"
-            icon={require("../../assets/icon/drop.png")}
-            setUserdata={setBloodType}
-          />
-          <InputBox
-            secureText={false}
-            Inputtype="location"
-            text="location"
-            icon={require("../../assets/icon/Vector.png")}
-            setUserdata={setLocation}
-          />
-          <View></View>
+    <Formik onSubmit={(values) => console.log("submitted", values)}>
+      <View>
+        <InputBox
+          secureText={false}
+          Inputtype="givenName"
+          text="Name"
+          icon={require("../../assets/icon/profile.png")}
+          setUserdata={setName}
+        />
+        <InputBox
+          secureText={false}
+          Inputtype="emailAddress"
+          text="Email"
+          icon={require("../../assets/icon/mail.png")}
+          setUserdata={setEmail}
+        />
+        <InputBox
+          secureText={true}
+          Inputtype="newPassword"
+          text="password"
+          icon={require("../../assets/icon/password.png")}
+          setUserdata={setPassword}
+        />
+        <InputBox
+          secureText={false}
+          Inputtype="telephoneNumber"
+          text="Phone"
+          icon={require("../../assets/icon/phone.png")}
+          setUserdata={setPhone}
+        />
+        <InputBox
+          secureText={false}
+          Inputtype="none"
+          text="Blood group"
+          icon={require("../../assets/icon/drop.png")}
+          setUserdata={setBloodType}
+        />
+        <InputBox
+          secureText={false}
+          Inputtype="location"
+          text="location"
+          icon={require("../../assets/icon/Vector.png")}
+          setUserdata={setLocation}
+        />
+        <View></View>
 
-          <Buttonfill text="REGISTER" onPress={handleForm} />
-        </View>
-      </Formik>
+        <Buttonfill text="REGISTER" onPress={registerUserHandler} />
+      </View>
+    </Formik>
   );
 }
-
-
