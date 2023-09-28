@@ -1,22 +1,29 @@
-import { CREATE_USER } from "../action/types";
+import * as types from '../action/types'
 
- const initialState = {
-    userDetial:"",
-    user:[]
- }
+const initialState = {
+  isLoading: false,
+  isLoad: false,
+  isError: false,
+  createUserdata: [],
+};
 
- export const userDataReducer = (state = initialState ,action)=>{
-    switch (action.type){
-        case  CREATE_USER :
-            return {
-                ...state,
-                places :state.user.concat({
-                    value:action.payload
-                })
-            }
-
-        default:{
-            return state
-        }
+export default function reducer(state = initialState, action) {
+  let { type, payload } = action;
+  switch (type) {
+    case types.CREATE_USER_REQUEST: {
+      return { ...state, isLoading: true, isError: false ,createUserdata:payload };
     }
- }
+
+    case types.CREATE_USER_SUCCESS: {
+      return { ...state, isLoading: true, isError: false ,createUserdata:payload };
+    }
+
+    case types.CREATE_USER_FAILED: {
+      return { ...state, isLoading: true, isError: false ,createUserdata:payload };
+    }
+
+    default: {
+      return state;
+    }
+  }
+}

@@ -37,7 +37,7 @@ export default function Authscreen({ isLogin }) {
             <Text style={style.heading}>Dare To Donate </Text>
           </View>
           <View style={style.inputBody}>
-            {isRegister ? <LoginComponent openForgetpassTab={openForgetpassTab} /> : <RegisterComponent />}
+            {isRegister ? <LoginComponent openForgetpassTab={openForgetpassTab} /> : <RegisterComponent changeScreen={changeScreen} />}
           </View>
           <View style={style.lastText}>
             <View style={style.footer}>
