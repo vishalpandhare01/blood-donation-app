@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { Connect, useDispatch, useSelector } from "react-redux";
-import createuser, { create_user } from "../../redux/action/actionapi";
+import {createuser} from "../../redux/action/actionapi";
 
 export default function RegisterComponent({changeScreen}) {
   const [name, setName] = useState("");
@@ -24,15 +24,14 @@ export default function RegisterComponent({changeScreen}) {
   function registerUserHandler() {
     dispatch(createuser({name, email, password, phone, blood_type, address}))
     console.log('createUserdata',createUserdata)
-
-    if(createUserdata === 201){
-      Alert.alert('SUCCESS !' ,'ACOUNT CREADET PLEASE LOGIN')
+    if(createUserdata.status === 201){
+      Alert.alert('SUCCESS !' ,'ACOUNT CREATED PLEASE LOGIN')
       changeScreen()
     }
   }
 
   return (
-    <Formik onSubmit={(values) => console.log("submitted", values)}>
+    <Formik>
       <View>
         <InputBox
           secureText={false}

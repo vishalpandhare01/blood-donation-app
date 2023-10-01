@@ -4,18 +4,28 @@ import { useState } from "react";
 import Buttonfill from "../../ui/button2";
 import { Colors } from "../../../styles/colors";
 import PasswordChangesceen from "./passwordchange";
+import { useDispatch, useSelector } from "react-redux";
+import { veryfyOTPapi } from "../../../redux/action/actionapi";
+import * as SecureStore from 'expo-secure-store';
 
-export default function OtpScreen({ setOtpScreenOpen }) {
-  const [otp, setOtp] = useState([]);
+export default function OtpScreen({ setOtpScreenOpen, email }) {
+  let [otp, setOtp] = useState([]);
   const [passwordScreen, setPasswordScreen] = useState(false);
 
   function setOtpnumber(data) {
     setOtp((current) => [...current, data]);
   }
 
-  function submitForm() {
-    console.log(otp.join(""));
-    setPasswordScreen(true);
+  const dispatch = useDispatch();
+  const { veryfyOTPdata } = useSelector((state) => state.reducer);
+
+  async function submitForm() {
+    otp = Number(otp.join(""))
+    dispatch(veryfyOTPapi({ email, otp }));
+    if(veryfyOTPdata.status === 200){
+     await SecureStore.setItemAsync('userId',veryfyOTPdata.data.userId)
+      setPasswordScreen(true);
+    }
   }
 
   function ResendOTP() {

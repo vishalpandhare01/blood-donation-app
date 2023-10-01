@@ -4,20 +4,32 @@ import InputBox from "../ui/inputbox";
 import { useState } from "react";
 import Buttonfill from "../ui/button2";
 import { Colors } from "../../styles/colors";
+import { useDispatch, useSelector } from "react-redux";
+import {loginuser} from "../../redux/action/actionapi";
+import * as SecureStore from 'expo-secure-store';
 
-export default function LoginComponent({openForgetpassTab}) {
+export default function LoginComponent({ openForgetpassTab }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  function handleForm() {
-    console.log(email, password);
+
+  const dispatch = useDispatch();
+  const {loginuserData} = useSelector((state) => state.reducer);
+
+ async function  handleForm() {
+    dispatch(loginuser({ email, password }));
+    if(loginuserData.status === 200){
+     await  SecureStore.setItemAsync('secure_token',loginuserData.data.token);
+  // const token = await SecureStore.getItemAsync('secure_token');
+  // console.log(token);
+      console.log('redirect to login screen');
+    }
   }
+
   
- 
 
   return (
     <>
-      <Formik onSubmit={(values) => console.log("submitted", values)}>
+      <Formik >
         <View style={style.container}>
           <InputBox
             secureText={false}
@@ -59,8 +71,8 @@ const style = StyleSheet.create({
     color: Colors.red500,
     fontWeight: "500",
   },
-  buttoncontainer:{
-    marginTop:10,
-    marginBottom:-10
-  }
+  buttoncontainer: {
+    marginTop: 10,
+    marginBottom: -10,
+  },
 });

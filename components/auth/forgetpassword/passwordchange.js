@@ -4,13 +4,27 @@ import Buttonfill from "../../ui/button2";
 import { Colors } from "../../../styles/colors";
 import { useState } from "react";
 import FinishScreen from "./finish";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import {useDispatch,useSelector} from 'react-redux'
+import { passwordUpdateapi } from "../../../redux/action/actionapi";
+import * as SecureStore from 'expo-secure-store';
 
 export default function PasswordChangesceen(){
 const [loginPage ,setLoginPage] = useState(false)
+const [password,setPasseword] = useState("")
+const [password2,setPasseword2] = useState("")
 
-    function handlesubmitForm(){
-        setLoginPage(true)
+const dispatch = useDispatch()
+const { passwordUpdateData } = useSelector((state) => state.reducer);
+   async function handlesubmitForm(){
+      if(password === password2){
+        const userId = await SecureStore.getItemAsync('userId')
+        dispatch(passwordUpdateapi({password,userId}))
+        if(passwordUpdateData.status === 200){
+          setLoginPage(true)
+          await SecureStore.deleteItemAsync('userId')
+        }
+      }
     }
 
     return loginPage ? <FinishScreen/> :
@@ -22,16 +36,17 @@ const [loginPage ,setLoginPage] = useState(false)
             Inputtype="newPassword"
             text="password"
             icon={require("../../../assets/icon/password.png")}
-            // setUserdata={setPassword}
+            setUserdata={setPasseword}
           />
           <InputBox
             secureText={false}
             Inputtype="newPassword"
             text="password"
             icon={require("../../../assets/icon/password.png")}
-            // setUserdata={setPhone}
+            setUserdata={setPasseword2}
           />
       </View>
+      <Text style={{textAlign:'center'}}>{password === password2 ?'':'Password Not Matched'}</Text>
       <View style={style.buttoncontainer}>
         <Buttonfill text="SUBMIT" onPress={handlesubmitForm} />
       </View>
