@@ -2,14 +2,17 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import OnbordingComponent1 from "./onbordings/onboarding1";
 import OnbordingComponent2 from "./onbordings/onboarding2";
 import { Colors } from "../../styles/colors";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import OnbordingComponent3 from "./onbordings/onboarding3";
+import { useDispatch, useSelector } from "react-redux";
+import { serverStart } from "../../redux/action/actionapi";
 
 export default function Onboarding() {
   const [page2, setPage2] = useState(false);
   const [page3, setPage3] = useState(false);
 
   function NextpageHandller() {
+    dispatch(serverStart())
     if (!page2) {
       setPage2(true);
     } else if (page2) {
@@ -18,8 +21,16 @@ export default function Onboarding() {
   }
 
  function SkipageHnadler(){
+   dispatch(serverStart())
   setPage3(true);
  }
+
+const dispatch = useDispatch()
+const {serverData} = useSelector((state)=>state.reducer)
+useLayoutEffect(()=>{
+  dispatch(serverStart())
+  console.log(serverData.data)
+},[])
 
   if (page3) {
     return <OnbordingComponent3 />;

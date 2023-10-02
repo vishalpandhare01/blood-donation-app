@@ -11,9 +11,12 @@ import LoginComponent from "../components/auth/login";
 import { useState } from "react";
 import { Colors } from "../styles/colors";
 import ForgetPassword from "../components/auth/forgetpassword";
+import MainScreen from "./main";
 
 export default function Authscreen({ isLogin }) {
   const [isRegister, setIsRegister] = useState(isLogin);
+  const [mainScreen ,setMainScreen] = useState(false)
+
 
   function changeScreen() {
     isRegister ? setIsRegister(false) : setIsRegister(true);
@@ -28,6 +31,10 @@ export default function Authscreen({ isLogin }) {
     setForgetPassword(true)
   }
 
+  if(mainScreen){
+    return <MainScreen/>
+  }
+
   return (
     <>
       <KeyboardAvoidingView style={style.container} behavior="padding" enabled>
@@ -37,7 +44,7 @@ export default function Authscreen({ isLogin }) {
             <Text style={style.heading}>Dare To Donate </Text>
           </View>
           <View style={style.inputBody}>
-            {isRegister ? <LoginComponent openForgetpassTab={openForgetpassTab} /> : <RegisterComponent changeScreen={changeScreen} />}
+            {isRegister ? <LoginComponent openForgetpassTab={openForgetpassTab} setMainScreen={setMainScreen} /> : <RegisterComponent changeScreen={changeScreen} />}
           </View>
           <View style={style.lastText}>
             <View style={style.footer}>

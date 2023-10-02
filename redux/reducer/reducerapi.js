@@ -8,12 +8,27 @@ const initialState = {
   loginuserData:[],
   sendOTPdata:[],
   veryfyOTPdata:[],
-  passwordUpdateData:[]
+  passwordUpdateData:[],
+  serverData:[],
 };
 
 export default function reducer(state = initialState, action) {
   let { type, payload } = action;
   switch (type) {
+    case types.SERVER_REQUEST: {
+      return { ...state, isLoading: true, isError: false ,serverData:payload };
+    }
+
+    case types.SERVER_SUCCESS: {
+      return { ...state, isLoading: true, isError: false ,serverData:payload };
+    }
+
+    case types.SERVER_FAILED: {
+      return { ...state, isLoading: true, isError: false ,serverData:payload };
+    }
+
+
+
     case types.CREATE_USER_REQUEST: {
       return { ...state, isLoading: true, isError: false ,createUserdata:payload };
     }

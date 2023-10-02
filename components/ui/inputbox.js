@@ -34,6 +34,6 @@ const style = StyleSheet.create({
   },
   inputField: {
     margin: 5,
-    width:200
+    width:250
   },
 });

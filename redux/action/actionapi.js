@@ -18,9 +18,41 @@ import {
   PASSWORD_UPDATE_REQUEST,
   PASSWORD_UPDATE_SUCCESS,
   PASSWORD_UPDATE_FAILED,
+  SERVER_REQUEST,
+  SERVER_SUCCESS,
+  SERVER_FAILED,
  
 } from "./types";
 import { Alert } from "react-native";
+
+export  function serverStart(data) {
+  return async (dispatch) => {
+    dispatch({ type: SERVER_REQUEST });
+    const option = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        BASE_URL + EndPoints.server,
+        option
+      );
+      // configAPIcall()
+      return dispatch({
+        type: SERVER_SUCCESS,
+        payload: res,
+      });
+    } catch (err) {
+      Alert.alert('ERROR!!' ,err.response.data.message)
+      return dispatch({
+        type: SERVER_FAILED,
+        payload: err.response.data.message,
+      });
+    }
+  };
+}
 
 export  function createuser(data) {
   return async (dispatch) => {
@@ -97,6 +129,7 @@ export  function sendOTPapi(data) {
         data,
         option
       );
+      console.log('res',res.status)
       return dispatch({
         type: SEND_OTP_SUCCESS,
         payload: res,
@@ -140,7 +173,6 @@ export  function veryfyOTPapi(data) {
   };
 }
 
-
 export  function passwordUpdateapi(data) {
   return async (dispatch) => {
     dispatch({ type: PASSWORD_UPDATE_REQUEST });
@@ -169,3 +201,6 @@ export  function passwordUpdateapi(data) {
     }
   };
 }
+
+
+

@@ -7,25 +7,26 @@ import { Colors } from "../../styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import {loginuser} from "../../redux/action/actionapi";
 import * as SecureStore from 'expo-secure-store';
+import {useNavigation} from '@react-navigation/native'
 
-export default function LoginComponent({ openForgetpassTab }) {
+export default function LoginComponent({ openForgetpassTab ,setMainScreen}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const {loginuserData} = useSelector((state) => state.reducer);
+  const navigation = useNavigation()
 
  async function  handleForm() {
     dispatch(loginuser({ email, password }));
     if(loginuserData.status === 200){
      await  SecureStore.setItemAsync('secure_token',loginuserData.data.token);
-  // const token = await SecureStore.getItemAsync('secure_token');
-  // console.log(token);
       console.log('redirect to login screen');
+      setMainScreen(true)
     }
   }
 
-  
+ 
 
   return (
     <>
