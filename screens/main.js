@@ -87,8 +87,8 @@ export default function MainScreen() {
         />
 
         <Tab.Screen
-          name="Request"
-          component={RequestComponent}
+          name="Report"
+          component={ReportComponent}
           options={{
             tabBarLabel: "",
             tabBarIcon: ({ color, size }) => (
@@ -109,8 +109,8 @@ export default function MainScreen() {
         />
 
         <Tab.Screen
-          name="Report"
-          component={ReportComponent}
+          name="Request"
+          component={RequestComponent}
           options={{
             tabBarLabel: "",
             tabBarIcon: ({ focused, color, size }) =>
