@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     fontSize:17,
     margin:20,
-    marginBottom:6,
+    marginBottom:4,
     marginTop:6
   },
 });

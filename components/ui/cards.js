@@ -8,27 +8,27 @@ export default function Cardcomponent() {
       <View style={styles.container}>
         <View style={styles.card}>
           <Image source={require("../../assets/card/find.png")} />
-          <Text>Find Donors</Text>
+          <Text style={styles.text}>Find Donors</Text>
         </View>
         <View style={styles.card}>
           <Image source={require("../../assets/card/donats.png")} />
-          <Text>Donates</Text>
+          <Text style={styles.text}>Donates</Text>
         </View>
         <View style={styles.card}>
           <Image source={require("../../assets/card/orderblood.png")} />
-          <Text>Order Bloods</Text>
+          <Text style={styles.text}>Order Bloods</Text>
         </View>
         <View style={styles.card}>
           <Image source={require("../../assets/card/assistant.png")} />
-          <Text>Assistant</Text>
+          <Text style={styles.text}>Assistant</Text>
         </View>
         <View style={styles.card}>
           <Image source={require("../../assets/card/report.png")} />
-          <Text>Report</Text>
+          <Text style={styles.text}>Report</Text>
         </View>
         <View style={styles.card}>
           <Image source={require("../../assets/card/campign.png")} />
-          <Text>Campaign</Text>
+          <Text style={styles.text}>Campaign</Text>
         </View>
       </View>
     </>
@@ -54,4 +54,8 @@ const styles = StyleSheet.create({
     shadowOpacity:5,
     shadowColor:Colors.red500
   },
+  text:{
+    color:Colors.red300,
+    fontSize:14
+  }
 });

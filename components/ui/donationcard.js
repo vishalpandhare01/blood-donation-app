@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginHorizontal: 20,
-    marginTop: 5,
+    marginTop: 12,
     padding: 18,
     paddingTop: 8,
     backgroundColor: "#ffffff",
@@ -39,13 +39,15 @@ const styles = StyleSheet.create({
   headerText: {
     // fontFamily:'Poppins',
     fontSize: 14,
-    color: Colors.red400,
+    color: Colors.red300,
     marginTop: 3,
+    fontWeight:'400'
   },
   text: {
     // fontFamily:'Poppins',
     fontSize: 14,
     color: Colors.red500,
+    fontWeight:'500'
   },
   imageContainer: {
     justifyContent: "flex-end",
