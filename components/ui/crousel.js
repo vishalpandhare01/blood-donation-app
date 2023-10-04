@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-// import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
+import {Colors} from '../../styles/colors'
+
 const data = [
   {
     title: "Aenean leo",
@@ -27,12 +28,10 @@ const data = [
 
 const renderItem = ({ item, index }) => {
   return (
-    <View >
-      <Image
-        style={styles.imagestyle}
-        source={require("../../assets/poster.png")}
-      />
-    </View>
+    <Image
+      style={styles.imagestyle}
+      source={require("../../assets/poster.png")}
+    />
   );
 };
 
@@ -49,7 +48,8 @@ const CarouselCards = () => {
         sliderWidth={400}
         itemWidth={400}
         onSnapToItem={(index) => setIndex(index)}
-        // useScrollView={true}
+        useScrollView={true}
+        style={styles.carousel}
       />
       <Pagination
         dotsLength={data.length}
@@ -59,8 +59,9 @@ const CarouselCards = () => {
           width: 10,
           height: 10,
           borderRadius: 5,
-          // marginHorizontal: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.92)",
+          marginHorizontal: 0,
+          backgroundColor: Colors.red500,
+          marginVertical:-3
         }}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
@@ -77,8 +78,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   imagestyle: {
-    margin: 10,
-    width: 330,
+    padding:10,
+    width: 374,
+    height:170,
     borderRadius: 20,
+    marginTop:10,
+    marginLeft:-20,
   },
+  carousel:{
+    margin:0,
+    borderWidth:5
+  }
 });

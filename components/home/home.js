@@ -1,28 +1,35 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "react-native";
 import CarouselCards from "../ui/crousel";
 import Cardcomponent from "../ui/cards";
+import DonationCard from "../ui/donationcard";
+import { Colors } from "../../styles/colors";
 
 export default function HomeComponent() {
   return (
     <>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
+      <ScrollView >
+        <View style={styles.container}>
           <CarouselCards />
           <Cardcomponent />
+          <Text style={styles.text}>Donation Request</Text>
+          <DonationCard />
         </View>
-        <Text>HOME</Text>
-      </View>
+      </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: "center",
+    margin: 10,
   },
-  imageContainer: {
-    // marginRight: 100,
+  text: {
+    color:Colors.red500,
+    fontWeight:'500',
+    fontSize:17,
+    margin:20,
+    marginBottom:6,
+    marginTop:6
   },
 });
