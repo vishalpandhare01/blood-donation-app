@@ -25,6 +25,7 @@ const style = StyleSheet.create({
     margin: 5,
     height: 55,
     width: 300,
+    elevation:2
   },
   icon: {
     backgroundColor: Colors.red100,

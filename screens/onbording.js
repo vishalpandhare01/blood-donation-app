@@ -2,12 +2,16 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import Onboarding from "../components/onboarding/onbording";
 import { NavigationContainer } from "@react-navigation/native";
 import { isAuthuenticated } from "../middleware/authenticated";
-import MainScreen from "./main";
+import MainScreen, { OtherScreen } from "./main";
 
 export default function OnboardingScreen() {
   return (
     <NavigationContainer>
-      {isAuthuenticated().then((res) => res) ? <MainScreen /> : <Onboarding />}
+      {isAuthuenticated().then((res) => {
+        console.log(res)
+       return res
+        
+        }) ? <Onboarding /> : <MainScreen /> }     
     </NavigationContainer>
   );
 }

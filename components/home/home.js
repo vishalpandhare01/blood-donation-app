@@ -23,6 +23,7 @@ export default function HomeComponent() {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
+    backgroundColor:'#ffffff'
   },
   text: {
     color:Colors.red500,

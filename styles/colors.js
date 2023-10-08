@@ -5,4 +5,5 @@ export const Colors = {
   red300:"#3A4351",
   red400 :"#7E7E7E",
   red500: "#FF2156",
+  pink400:'#689593'
 };

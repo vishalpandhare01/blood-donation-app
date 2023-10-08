@@ -26,7 +26,6 @@ export default function LoginComponent({ openForgetpassTab ,setMainScreen}) {
     }
   }
 
- 
 
   return (
     <>

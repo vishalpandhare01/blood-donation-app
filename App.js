@@ -6,10 +6,21 @@ import { store } from "./redux/store/store";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import {} from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeComponent from "./components/home/home";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import FindDonars from "./components/other/finddonr";
 
-const stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
+
+// export function Home() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen name="FindDonar" component={FindDonars} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
 
 export default function App() {
   return (
