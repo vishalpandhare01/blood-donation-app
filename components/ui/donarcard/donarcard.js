@@ -15,10 +15,10 @@ import GestureRecognizer from "react-native-swipe-gestures";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Linking } from "react-native";
-export default function DonarCard() {
+export default function DonarCard({data}) {
   const [userProfile, setuserProfile] = useState(false);
   const navigation = useNavigation();
-
+// console.log(data)
   return (
     <>
       <Pressable onPress={() => setuserProfile(true)}>
@@ -26,18 +26,18 @@ export default function DonarCard() {
           <Image
             style={styles.cardProfileimage}
             source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg-5B4QzKAK0n161SAQG8HIKsMeMEbRE1FlQ&usqp=CAU",
+              uri:data.profile_pic,
             }}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.textname}>Ismail Bhai</Text>
+            <Text style={styles.textname}>{data.name}</Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <SimpleLineIcons
                 name="location-pin"
                 size={18}
                 color={Colors.red400}
               />
-              <Text style={styles.textLocation}>Ahemdabad , kdki</Text>
+              <Text style={styles.textLocation}>{data.address}</Text>
             </View>
           </View>
           {/* <View style={styles.iconImage}>
@@ -62,30 +62,31 @@ export default function DonarCard() {
                 <Image
                   style={styles.image}
                   source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg-5B4QzKAK0n161SAQG8HIKsMeMEbRE1FlQ&usqp=CAU",
+                    uri:data.profile_pic,
                   }}
                 />
               </View>
-              <Text style={{ margin: 3, fontSize: 24 }}>Fahim Ekan</Text>
+              <Text style={{ margin: 3, fontSize: 24 }}>{data.name}</Text>
               <Text style={{ color: Colors.red400, margin: 3 }}>
-                Chigong bangladesh
+               {data.address}
               </Text>
               <View style={styles.historyContainer}>
                 <Text style={{ padding: 10, color: Colors.red300 }}>
-                  6 Time Donated
+                  {data.donated.length} Time Donated
                 </Text>
                 <Text style={{ padding: 10, color: Colors.red300 }}>
-                  Blood Type AB+
+                  Blood Type {data.blood_type}
                 </Text>
               </View>
               <View style={styles.buttonContainer}>
                 <ButtonCallNow
-                  onPress={() => Linking.openURL(`tel:${8600244226}`)}
+                  onPress={() => Linking.openURL(`tel:${data.phone}`)}
                 >
                   Call now
                 </ButtonCallNow>
                 <ButtonRequiest
                   onPress={() => navigation.navigate("createRequiest")}
+                  //data.id
                 >
                   Requist
                 </ButtonRequiest>

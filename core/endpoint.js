@@ -5,4 +5,5 @@ export const EndPoints = {
     sendOTP:'/sendOTP',
     veryfyOTP:'/veryfyOTP',
     updatePassword:'/updatePassword',
+    getAlluser:'/getAlluser'
 }

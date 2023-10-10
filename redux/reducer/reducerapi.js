@@ -10,6 +10,7 @@ const initialState = {
   veryfyOTPdata:[],
   passwordUpdateData:[],
   serverData:[],
+  alluserData:[]
 };
 
 export default function reducer(state = initialState, action) {
@@ -93,6 +94,19 @@ export default function reducer(state = initialState, action) {
 
     case types.PASSWORD_UPDATE_FAILED: {
       return { ...state, isLoading: true, isError: false ,passwordUpdateData:payload };
+    }
+
+    
+    case types.GET_ALL_USER_REQUEST: {
+      return { ...state, isLoading: true, isError: false ,alluserData:payload };
+    }
+
+    case types.GET_ALL_USER_SUCCESS: {
+      return { ...state, isLoading: true, isError: false ,alluserData:payload };
+    }
+
+    case types.GET_ALL_USER_FAILED: {
+      return { ...state, isLoading: true, isError: false ,alluserData:payload };
     }
 
 
