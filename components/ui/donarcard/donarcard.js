@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Colors } from "../../../styles/colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonCallNow from "../profilebutton/callnow";
 import ButtonRequiest from "../profilebutton/requist";
 import GestureRecognizer from "react-native-swipe-gestures";
@@ -17,8 +17,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Linking } from "react-native";
 export default function DonarCard({data}) {
   const [userProfile, setuserProfile] = useState(false);
+  const [userData, setUserData] = useState({});
+
   const navigation = useNavigation();
-// console.log(data)
+  useEffect(()=>{
+    setUserData(data)
+    console.log(data)
+  },[])
   return (
     <>
       <Pressable onPress={() => setuserProfile(true)}>
@@ -26,18 +31,18 @@ export default function DonarCard({data}) {
           <Image
             style={styles.cardProfileimage}
             source={{
-              uri:data.profile_pic,
+              uri:userData.profile_pic,
             }}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.textname}>{data.name}</Text>
+            <Text style={styles.textname}>{userData.name}</Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <SimpleLineIcons
                 name="location-pin"
                 size={18}
                 color={Colors.red400}
               />
-              <Text style={styles.textLocation}>{data.address}</Text>
+              <Text style={styles.textLocation}>{userData.address}</Text>
             </View>
           </View>
           {/* <View style={styles.iconImage}>
@@ -62,31 +67,32 @@ export default function DonarCard({data}) {
                 <Image
                   style={styles.image}
                   source={{
-                    uri:data.profile_pic,
+                    uri:userData.profile_pic,
                   }}
                 />
               </View>
-              <Text style={{ margin: 3, fontSize: 24 }}>{data.name}</Text>
+              <Text style={{ margin: 3, fontSize: 24 }}>{userData.name}</Text>
               <Text style={{ color: Colors.red400, margin: 3 }}>
-               {data.address}
+               {userData.address}
               </Text>
               <View style={styles.historyContainer}>
                 <Text style={{ padding: 10, color: Colors.red300 }}>
-                  {data.donated.length} Time Donated
+                  {/* {userData.donated.length} Time Donated */}
+
                 </Text>
                 <Text style={{ padding: 10, color: Colors.red300 }}>
-                  Blood Type {data.blood_type}
+                  Blood Type {userData.blood_type}
                 </Text>
               </View>
               <View style={styles.buttonContainer}>
                 <ButtonCallNow
-                  onPress={() => Linking.openURL(`tel:${data.phone}`)}
+                  onPress={() => Linking.openURL(`tel:${userData.phone}`)}
                 >
                   Call now
                 </ButtonCallNow>
                 <ButtonRequiest
                   onPress={() => navigation.navigate("createRequiest")}
-                  //data.id
+                  //userData.id
                 >
                   Requist
                 </ButtonRequiest>
