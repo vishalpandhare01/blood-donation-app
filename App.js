@@ -12,16 +12,6 @@ import FindDonars from "./components/other/finddonr";
 
 const Stack = createNativeStackNavigator();
 
-// export function Home() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen name="FindDonar" component={FindDonars} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
 export default function App() {
   return (
     <>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bloodDonationApp",
+    "name": "blood Donation",
     "slug": "bloodDonationApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FF2156"
-      }
+      },
+      "package": "com.vishalpandhare01.bloodDonationApp",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "668ba1d1-c425-4b25-8d3c-f6b18c5cf3c3"
+      }
     }
   }
 }

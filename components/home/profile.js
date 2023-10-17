@@ -1,11 +1,43 @@
-import { Image, NativeModules, Pressable, StyleSheet, Text, View } from "react-native";
+import { Button, Image, NativeModules, Pressable, StyleSheet, Text, View } from "react-native";
 import ButtonCallNow from "../ui/profilebutton/callnow";
 import ButtonRequiest from "../ui/profilebutton/requist";
 import { Colors } from "../../styles/colors";
 import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
+// import Notification from "../firebase/notification";
+import  {schedulePushNotification, registerForPushNotificationsAsync } from '../firebase/notification'
+import { useState, useEffect, useRef } from 'react';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import { sendNotification } from "../firebase/sendnotification";
 
 export default function ProfileComponent() {
+
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
+
+
+
+
   async function logout() {
     console.log('logout')
     await SecureStore.deleteItemAsync("secure_token");
@@ -43,6 +75,10 @@ export default function ProfileComponent() {
             <Text style={styles.userDetialText}>Requisted</Text>
           </View>
         </View>
+        {/* <Button title="notification"  onPress={async () => {
+      await schedulePushNotification('title','body','data')   }}/> */}
+      
+        <Pressable onPress={ ()=>sendNotification() }>
         <View style={styles.settingContainer}>
           <View style={styles.settingContainerRow}>
             <Feather
@@ -56,6 +92,7 @@ export default function ProfileComponent() {
             </Text>
           </View>
         </View>
+        </Pressable>
         <View style={styles.settingContainer}>
           <View style={styles.settingContainerRow}>
             <Feather
